@@ -43,10 +43,12 @@ public partial class SceneObjectReferencer : EditorWindow
     private bool _isAllSelected;
     private bool _isFoldoutOpened;
 
-    private void CreateGUI()
+    private async void CreateGUI()
     {
         _rootVisualTreeAsset.CloneTree(rootVisualElement);
         rootVisualElement.styleSheets.Add(_rootStyleSheet);
+        EditorLocalization editorLocalization = ScriptableObject.CreateInstance<EditorLocalization>();
+        editorLocalization.GetTable();
 
         // コンポーネント表示のボタンのクリックイベント
         // ObjectField内のオブジェクトにアタッチされているコンポーネントを表示する
