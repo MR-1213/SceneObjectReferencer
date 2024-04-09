@@ -1,0 +1,33 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Scripts/Editor/SceneObjectReferencer.uss?fileID=7433441132597879392&amp;guid=ad9c71fcd50f05d4c96c7a2a36345a98&amp;type=3#SceneObjectReferencer" />
+    <ui:ScrollView name="WindowScroll">
+        <ui:VisualElement name="FindComponentsAreaBorder" style="padding-left: 1.2px; padding-right: 1.2px; padding-top: 1.2px; padding-bottom: 1.2px; background-color: rgb(24, 24, 24); margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 0; width: auto; min-width: 390px;">
+            <ui:VisualElement name="FindComponentsArea" style="background-color: rgb(75, 75, 75); height: auto; -unity-text-outline-width: 0; overflow: visible; -unity-slice-left: 0; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; -unity-background-scale-mode: stretch-to-fill; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; width: auto;">
+                <ui:Label text="検索対象のオブジェクト" display-tooltip-when-elided="true" name="FindSourceLabel" style="height: auto; width: auto; align-items: flex-start; margin-top: 3px; margin-bottom: 3px; padding-left: 0; padding-right: 0; margin-right: 3px; margin-left: 3px; -unity-text-outline-width: 0; -unity-font-style: bold;" />
+                <uie:ObjectField name="SourceObjectField" allow-scene-objects="true" type="UnityEngine.GameObject, UnityEngine.CoreModule" style="display: flex; visibility: visible; height: auto; width: auto;" />
+                <ui:Toggle label="非アクティブなコンポーネントを含める" name="IsIncludeInactiveComponent" style="flex-direction: row-reverse; -unity-text-align: upper-left; -unity-font-style: normal; font-size: 12px; width: 190px;" />
+                <ui:Button text="コンポーネントを表示" display-tooltip-when-elided="true" name="ShowComponentButton" style="visibility: visible; overflow: hidden; margin-top: 15px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="FoundComponentsAreaBorder" tabindex="0" style="padding-left: 1.2px; padding-right: 1.2px; padding-top: 1.2px; padding-bottom: 1.2px; margin-top: 5px; background-color: rgb(24, 24, 24); flex-direction: column; margin-left: 5px; margin-right: 5px; width: auto; min-width: 390px;">
+            <ui:VisualElement name="FoundComponentsArea" style="background-color: rgb(75, 75, 75); height: auto; flex-direction: column; min-width: auto; width: auto; min-height: auto;">
+                <ui:VisualElement style="flex-direction: row; min-width: 380px;">
+                    <ui:VisualElement style="min-width: auto;">
+                        <ui:Label text="コンポーネント選択" display-tooltip-when-elided="true" name="FoundComponentsLabel" style="-unity-font-style: bold; margin-bottom: 15px;" />
+                        <ui:RadioButtonGroup value="-1" name="SourceComponentsGroup" style="flex-direction: column; visibility: visible;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="SearchOptions" style="min-width: auto; -unity-text-align: upper-left; width: auto; margin-left: 15px; visibility: visible; display: none;">
+                        <ui:Toggle label="非アクティブなオブジェクトを含める" name="IsIncludeInactiveObject" style="flex-direction: row; -unity-text-align: middle-left; margin-right: 3px; width: auto; position: relative; justify-content: flex-start; align-items: stretch; margin-top: 15px;" />
+                        <ui:Toggle label="検索対象のオブジェクトを含める" name="IsIncludeSourceObject" focusable="true" style="justify-content: flex-start; flex-direction: row; flex-wrap: nowrap; -unity-text-align: middle-left; margin-right: 3px; width: auto; transform-origin: center; margin-left: 11px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Button text="検索実行" display-tooltip-when-elided="true" name="SearchButton" focusable="true" style="justify-content: flex-start; margin-top: 15px; -unity-background-scale-mode: scale-to-fit; background-image: none; -unity-slice-right: 0; transform-origin: center; cursor: initial;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="SearchResultAreaBorder" style="padding-left: 1.2px; padding-right: 1.2px; padding-top: 1.2px; padding-bottom: 1.2px; margin-top: 5px; background-color: rgb(24, 24, 24); margin-left: 5px; margin-right: 5px; width: auto; min-width: 390px;">
+            <ui:VisualElement name="SearchResultArea" style="background-color: rgb(75, 75, 75); height: auto;">
+                <ui:Label text="検索結果" display-tooltip-when-elided="true" style="-unity-font-style: bold;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:ScrollView>
+</ui:UXML>
