@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-using System.Drawing;
 
 
 public partial class SceneObjectReferencer : EditorWindow
@@ -33,6 +32,7 @@ public partial class SceneObjectReferencer : EditorWindow
     [SerializeField] private VisualTreeAsset _rootVisualTreeAsset;
     [SerializeField] private StyleSheet _rootStyleSheet;
 
+    private EditorLocalization _editorLocalization;
     private static GameObject selectedGameObject;
     private Object _sourceObject;
     private Dictionary<string, Component> _sourceComponents = new Dictionary<string, Component>();
@@ -47,14 +47,22 @@ public partial class SceneObjectReferencer : EditorWindow
     {
         _rootVisualTreeAsset.CloneTree(rootVisualElement);
         rootVisualElement.styleSheets.Add(_rootStyleSheet);
-        EditorLocalization editorLocalization = ScriptableObject.CreateInstance<EditorLocalization>();
-        editorLocalization.GetTable();
+        _editorLocalization = ScriptableObject.CreateInstance<EditorLocalization>();
+
+        _editorLocalization.GetValue(EditorLocalization.TextTableKey.FindSourceLabel.ToString());
 
         // コンポーネント表示のボタンのクリックイベント
         // ObjectField内のオブジェクトにアタッチされているコンポーネントを表示する
         var showComponentButton = rootVisualElement.Q<Button>("ShowComponentButton");
         // ボタンをクリックできないようにする
         showComponentButton.SetEnabled(false);
+
+        // 言語選択のドロップダウンのイベント
+        var languageDropdown = rootVisualElement.Q<DropdownField>("LanguageSelectionDropdown");
+        languageDropdown.RegisterValueChangedCallback(async evt =>
+        {
+            _editorLocalization.ChangeLanguage(evt.newValue);
+        });
         
         // コンポーネント表示のボタンのクリックイベント
         showComponentButton.clickable.clicked += () =>
@@ -161,14 +169,14 @@ public partial class SceneObjectReferencer : EditorWindow
     private void Search()
     {
         var sourceObj = rootVisualElement.Q<ObjectField>("SourceObjectField").value;
-        var isIncludeInactiveObject = rootVisualElement.Q<Toggle>("IsIncludeInactiveObject").value;
+        var isIncludeInactiveComponent = rootVisualElement.Q<Toggle>("IsIncludeInactiveComponent").value;
         var isIncludeSourceObject = rootVisualElement.Q<Toggle>("IsIncludeSourceObject").value;
 
         rootVisualElement.Q<VisualElement>("SearchResultArea").Clear();
 
         if(_selectedGameObject != null)
         {
-            foreach (GameObject obj in FindObjectsOfType(typeof(GameObject), isIncludeInactiveObject))
+            foreach (GameObject obj in FindObjectsOfType(typeof(GameObject), isIncludeInactiveComponent))
             {
                 if(obj != sourceObj || isIncludeSourceObject)
                 {
@@ -204,7 +212,7 @@ public partial class SceneObjectReferencer : EditorWindow
 
         foreach(var targetComponent in _selectedComponents)
         {
-            foreach (GameObject obj in FindObjectsOfType(typeof(GameObject), isIncludeInactiveObject))
+            foreach (GameObject obj in FindObjectsOfType(typeof(GameObject), isIncludeInactiveComponent))
             {
                 if(obj != sourceObj || isIncludeSourceObject)
                 {

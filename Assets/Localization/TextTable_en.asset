@@ -19,7 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 46098952192
-    m_Localized: ' Object to search'
+    m_Localized: Object to search
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66349664972800
+    m_Localized: "\u975E\u30A2\u30AF\u30C6\u30A3\u30D6\u306A\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u3092\u542B\u3081\u308B"
     m_Metadata:
       m_Items: []
   references:

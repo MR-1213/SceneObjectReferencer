@@ -19,6 +19,10 @@ MonoBehaviour:
     m_Key: FindSourceLabel
     m_Metadata:
       m_Items: []
+  - m_Id: 66349664972800
+    m_Key: IsIncludeInactiveComponent
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
